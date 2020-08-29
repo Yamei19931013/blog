@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>全家桶之 Vuex | 优秀的 blossomsun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、什么是 Vuex?官方的解释： Vuex是一个专为Vue.js应用程序开发的状态管理模式简单的说：可以理解为整个Vue程序中的全局变量。 二、为什么要用 Vuex?应用场景：单页应用中，组件之间的数据状态。优点：1、当项目比较庞大的时候，每个组件的状态比较多，用了Vuex多层嵌套的组件、兄弟组件间的状态会更好管理维护。2、缓存一些当前要使用请求远程或本地的数据集（刷新后会自己销毁）。3、在2的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全家桶之 Vuex">
+<meta property="og:url" content="https://github.com/blossomsun/blog/2020/05/10/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/index.html">
+<meta property="og:site_name" content="优秀的 blossomsun">
+<meta property="og:description" content="一、什么是 Vuex?官方的解释： Vuex是一个专为Vue.js应用程序开发的状态管理模式简单的说：可以理解为整个Vue程序中的全局变量。 二、为什么要用 Vuex?应用场景：单页应用中，组件之间的数据状态。优点：1、当项目比较庞大的时候，每个组件的状态比较多，用了Vuex多层嵌套的组件、兄弟组件间的状态会更好管理维护。2、缓存一些当前要使用请求远程或本地的数据集（刷新后会自己销毁）。3、在2的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-10T14:13:26.000Z">
+<meta property="article:modified_time" content="2020-08-22T13:50:00.139Z">
+<meta property="article:author" content="blossomsun">
+<meta property="article:tag" content="vue 全家桶">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="优秀的 blossomsun" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">优秀的 blossomsun</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/blossomsun/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-5.3.1 全家桶之 vuex " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/10/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/" class="article-date">
+  <time datetime="2020-05-10T14:13:26.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      全家桶之 Vuex
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、什么是-Vuex"><a href="#一、什么是-Vuex" class="headerlink" title="一、什么是 Vuex?"></a>一、什么是 Vuex?</h2><p>官方的解释： Vuex是一个专为Vue.js应用程序开发的状态管理模式<br>简单的说：可以理解为整个Vue程序中的全局变量。</p>
+<h2 id="二、为什么要用-Vuex"><a href="#二、为什么要用-Vuex" class="headerlink" title="二、为什么要用 Vuex?"></a>二、为什么要用 Vuex?</h2><p>应用场景：单页应用中，组件之间的数据状态。<br>优点：<br>1、当项目比较庞大的时候，每个组件的状态比较多，用了Vuex多层嵌套的组件、兄弟组件间的状态会更好管理维护。<br>2、缓存一些当前要使用请求远程或本地的数据集（刷新后会自己销毁）。<br>3、在2的基础上可以减少向服务器的请求，节省资源。 用户越多，资源节省越可观。<br>4、对开发者来说，如果你的项目足够复杂，团队的规模也不仅是一个人，数据集中处理更利于程序的稳定和维护。  </p>
+<h2 id="三、Vuex-特点"><a href="#三、Vuex-特点" class="headerlink" title="三、Vuex 特点?"></a>三、Vuex 特点?</h2><p>1、响应式更新；<br>2、不能直接修改Vuex中的变量，只能通过显式地commit=&gt;mutation来进行数据的改变；</p>
+<h2 id="四、如何使用-Vuex"><a href="#四、如何使用-Vuex" class="headerlink" title="四、如何使用 Vuex?"></a>四、如何使用 Vuex?</h2><h3 id="1、使用npm安装-npm-i-vuex-s"><a href="#1、使用npm安装-npm-i-vuex-s" class="headerlink" title="1、使用npm安装: npm i vuex -s"></a>1、使用npm安装: npm i vuex -s</h3><h3 id="2、初级用法"><a href="#2、初级用法" class="headerlink" title="2、初级用法"></a>2、初级用法</h3><p>2.1 在项目的根目录下新增一个store文件夹，在该文件夹内创建index.js<br>2.2 初始化store下index.js中的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//挂载Vuex</span></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建Vuex对象</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state:&#123;</span><br><span class="line">        <span class="comment">//存放的键值对就是所要管理的状态</span></span><br><span class="line">        name:<span class="string">&#x27;baiyun&#x27;</span>,</span><br><span class="line">        age: <span class="string">&#x27;18&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">      saveName(nameVal)&#123;</span><br><span class="line">        state.name = nameVal</span><br><span class="line">      &#125;,</span><br><span class="line">      saveAge(ageVal)&#123;</span><br><span class="line">        state.age = ageVal</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+
+<p>2.3 在main.js 将store挂载到当前项目的Vue实例当中去</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  router,</span><br><span class="line">  store,  <span class="comment">//store:store 和router一样，将我们创建的Vuex实例挂载到这个vue实例中</span></span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>2.4 在组件中使用Vuex: $store.state.name</p>
+<h3 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h3><p>在初级用法中，我们把所有东西都写在一个文件中，这样数据多的时候，耦合度太高，也不便于维护，而且mutations也不能解决异步问题，这里就介绍另一种方式以及actions（间接触发mutations方法的一种 “ 中间商 “，而且它可以执行异步操作，避免用户去直接操作state）。在src目录中，创建store文件，并创建Vuex中模块的文件名，每一个都单独拆分开，便于管理模块。<br>规范目录结构：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">store:.</span><br><span class="line">│  actions.js</span><br><span class="line">│  getters.js</span><br><span class="line">│  index.js</span><br><span class="line">│  mutations.js</span><br><span class="line">│  mutations_type.js   ##该项为存放mutaions方法常量的文件，按需要可加入</span><br><span class="line">│</span><br><span class="line">└─modules</span><br><span class="line">        index.js</span><br></pre></td></tr></table></figure>
+
+<p>一共涉及5种属性：State、 Getter、Mutation 、Action、 Module</p>
+<p>3.1 把Vuex看成一个仓库，仓库里面放了很多对象。其中state就是数据源存放地，对应于一般Vue对象里面的data。state里面存放的数据是响应式的，Vue组件从store中读取数据，若是store中的数据发生改变，依赖这个数据的组件也会发生更新。 </p>
+<p>state.js ：保存所有数据，以对象的方式导出</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name:<span class="string">&#x27;baiyun&#x27;</span>, -- 默认值</span><br><span class="line">  age: <span class="string">&#x27;18&#x27;</span> -- 默认值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.2 getters 可以对State进行计算操作，它就是Store的计算属性。虽然在组件内也可以做计算属性，但是getters 可以在多组件之间复用。如果一个状态只在一个组件内使用，是可以不用getters。<br>getters.js: 对state中的成员加工后传递给外界。<br>Getters中的方法有两个默认参数:<br> 1）state 当前Vuex对象中的状态对象<br> 2）getters 当前getters对象，用于将getters下的其他getter拿来用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">    nameInfo(state)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;姓名:&quot;</span>+state.name</span><br><span class="line">    &#125;,</span><br><span class="line">    ageInfo(state,getters)&#123;</span><br><span class="line">        <span class="keyword">return</span> getters.nameInfo+<span class="string">&#x27;年龄:&#x27;</span>+state.age</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>组件中调用:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$store.getters.fullInfo</span><br></pre></td></tr></table></figure>
+
+<p>3.3、mutations.js ：保存所有方法，用来改变state的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存当前姓名</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveName = <span class="function">(<span class="params">state, name</span>) =&gt;</span> &#123;</span><br><span class="line">  state.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 保存当前年龄</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveAge = <span class="function">(<span class="params">state, age</span>) =&gt;</span> &#123;</span><br><span class="line">  state.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.4 actions中的方法有两个默认参数:<br> 1）context 上下文(相当于箭头函数中的this)对象<br> 2）payload 挂载参数<br>actions.js ：暴露给用户使用，借此触发mutations中的方法，保存数据（可执行异步操作）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 提交当前姓名</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveName = <span class="function">(<span class="params">&#123; commit &#125;, name</span>) =&gt;</span> &#123;</span><br><span class="line">  commit(<span class="string">&#x27;savePath&#x27;</span>, name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提交当前年龄</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveAge = <span class="function">(<span class="params">&#123; commit &#125;, age</span>) =&gt;</span> &#123;</span><br><span class="line">  commit(<span class="string">&#x27;saveAge&#x27;</span>, age);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在组件中调用:this.$store.dispatch(‘saveName’,{age:15})</p>
+<p>3.5 index.js：引入相应模块，暴露出store，供vue注册后全局使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> state <span class="keyword">from</span> <span class="string">&#x27;./state&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actions <span class="keyword">from</span> <span class="string">&#x27;./actions&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> mutations <span class="keyword">from</span> <span class="string">&#x27;./mutations&#x27;</span>;</span><br><span class="line"> </span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state,</span><br><span class="line">  actions,</span><br><span class="line">  mutations</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3.6 main.js中引入index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入vuex-store</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store/index&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3.7 保存数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">&#x27;Vuex&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 2种方式</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 方法一（dispatch）: 通过disptach派发给actions，让actions去触发</span></span><br><span class="line"><span class="built_in">this</span>.$store.dispatch(<span class="string">&#x27;saveName&#x27;</span>, <span class="built_in">this</span>.DbSource);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 方法二（映射）</span></span><br><span class="line"><span class="comment">// 1、通过methods方法添加映射关系 : 通过在methods中添加映射关系，数组方式，我们可以在数组中写多个方法（这里数组中的每一个方法名是actions.js文件中所定义的方法名）, 然后在需要使用的地方直接this.方法名即可。 当然，也可以直接绑定给html中的某个事件。值的注意的是，避免和methods中自己定义的其他方法的名字冲突</span></span><br><span class="line">methods: &#123;</span><br><span class="line">    ...mapActions([<span class="string">&#x27;saveName&#x27;</span>])</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">// 2、使用 </span></span><br><span class="line"><span class="built_in">this</span>.saveName</span><br></pre></td></tr></table></figure>
+<p>3.8 数据获取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; mapState &#125; <span class="keyword">from</span> <span class="string">&#x27;Vuex&#x27;</span>;</span><br><span class="line"> </span><br><span class="line">computed: &#123;</span><br><span class="line">    ...mapState([<span class="string">&#x27;saveName&#x27;</span>]),</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">    saveName(currVal) &#123;</span><br><span class="line">        <span class="comment">// 监听mapState中的变量，当数据变化（有值、值改变等），</span></span><br><span class="line">        <span class="comment">// 保证能拿到完整的数据，不至于存在初始化没有数据的问题，然后可以赋给本组件data中的变量</span></span><br><span class="line">      <span class="built_in">this</span>.currVal = currVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4、Vuex-namespaced的作用以及使用方式"><a href="#4、Vuex-namespaced的作用以及使用方式" class="headerlink" title="4、Vuex namespaced的作用以及使用方式"></a>4、Vuex namespaced的作用以及使用方式</h3><p>Vuex中的store分模块管理，需要在store的index.js中引入各个模块，为了解决不同模块命名冲突的问题，将不同模块的namespaced:true，之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名<br>4.1 声明分模块的store时加上namespaced:true<br>4.2 使用模块中的mutations、getters、actions时候，要加上模块名，例如使用commint执行mutations时, 格式：模块名/模块中的mutations<br>4.3、获取属性时同样加上模块名,格式：$store.state.模块名.模块属性</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/blossomsun/blog/2020/05/10/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/" data-id="ckefjrl9w000es0sx7ox5g5rv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/" rel="tag">vue 全家桶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/05/10/5.3%20vue%20%E5%85%A8%E5%AE%B6%E6%A1%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue 全家桶
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/05/05/1.2%20%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20200505总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/my-review/" rel="tag">my review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/" rel="tag">vue 全家桶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%BE%BF%E6%8D%B7%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9/" rel="tag">便捷的第三方</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" rel="tag">兼容问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" rel="tag">微前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" rel="tag">杂七杂八的小问题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/my-review/" style="font-size: 10px;">my review</a> <a href="/blog/tags/vue/" style="font-size: 15px;">vue</a> <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/" style="font-size: 20px;">vue 全家桶</a> <a href="/blog/tags/%E4%BE%BF%E6%8D%B7%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9/" style="font-size: 10px;">便捷的第三方</a> <a href="/blog/tags/%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" style="font-size: 10px;">兼容问题</a> <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">微前端</a> <a href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/blog/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" style="font-size: 10px;">杂七杂八的小问题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 blossomsun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

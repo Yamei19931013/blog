@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>微前端相关（一） | 优秀的 blossomsun</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="微服务之间中转白屏问题；主框架里放通用的组件集合(比如：导航)，在子项目里无需再引入，子项目只关心自己的业务就可以；乾坤（最低 IE 版本为 11）：        简单        任意 js 框架均可使用。子应用接入像使用接入一个 iframe 系统一样简单，但实际不是 iframe。     完备     几乎包含所有构建微前端系统时所需要的基本能力，如 样式隔离、js 沙箱、预加载等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微前端相关（一）">
+<meta property="og:url" content="https://github.com/blossomsun/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/index.html">
+<meta property="og:site_name" content="优秀的 blossomsun">
+<meta property="og:description" content="微服务之间中转白屏问题；主框架里放通用的组件集合(比如：导航)，在子项目里无需再引入，子项目只关心自己的业务就可以；乾坤（最低 IE 版本为 11）：        简单        任意 js 框架均可使用。子应用接入像使用接入一个 iframe 系统一样简单，但实际不是 iframe。     完备     几乎包含所有构建微前端系统时所需要的基本能力，如 样式隔离、js 沙箱、预加载等。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-16T13:05:09.000Z">
+<meta property="article:modified_time" content="2020-08-22T08:53:18.229Z">
+<meta property="article:author" content="blossomsun">
+<meta property="article:tag" content="微前端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="优秀的 blossomsun" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">优秀的 blossomsun</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/blossomsun/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-4.1 微前端相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2020-04-16T13:05:09.000Z" itemprop="datePublished">2020-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微前端相关（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>微服务之间中转白屏问题；<br>主框架里放通用的组件集合(比如：导航)，在子项目里无需再引入，子项目只关心自己的业务就可以；<br>乾坤（最低 IE 版本为 11）：<br>        简单<br>        任意 js 框架均可使用。子应用接入像使用接入一个 iframe 系统一样简单，但实际不是 iframe。</p>
+<pre><code>    完备
+    几乎包含所有构建微前端系统时所需要的基本能力，如 样式隔离、js 沙箱、预加载等。
+
+    生产可用
+    已在蚂蚁内外经受过足够大量的线上系统的考验及打磨，健壮性值得信赖(200多个线上应用用接入)
+
+    官网：https://qiankun.umijs.org/zh/</code></pre><p>飞冰（主项目必须以React，最低 IE 版本为 11）：<br>        框架应用只需依赖 npm 包 @ice/stark，不耦合任何工程体系</p>
+<pre><code>    接入简单，子应用支持 React/Vue/Angular... 等不同框架
+
+    子应用独立开发、不耦合任何工程体系，已有应用迁移成本极低
+
+    整个系统用户体验好，跟 SPA 应用基本一致
+
+    子应用只需发布前端资源 bundle 即可，框架应用通过 bundle 渲染子应用
+    不足
+    样式只能通过约定以及CSS Modules来与框架隔离
+    资源无法预加载
+    生产可用
+    已在阿里创作者平台、阿里健康-熙牛医疗云医院信息系统、淘系小二工作台
+    官网：https://ice.work/docs/icestark/about</code></pre><p>H5导航接入：</p>
+<p>头部导航和底部的导航主站会统一引用，接入乾坤后需要子应用通知主应用页面路由的变化。<br>各微服务原页面内引用的导航不需要删除，导航组件会根据环境自动选择加不加载<br>接入方法：<br>1、原mount 方法内处理乾坤路由的方法多接受2个参数setGlobalState, state，用于父子通信</p>
+<pre><code class="javascript">export async function mount ({ data = {}, ROUTES, routerBase, state, setGlobalState } = {}) {
+if (!routerBase) return
+
+
+setLanguage().then(() =&gt; {
+instance = new Vue({
+router: getQkRouter(routerBase, setGlobalState, state),
+store,
+i18n,
+render: h =&gt;
+h(App, {
+props: { ...data, ...state }
+        })
+    }).$mount(&#39;#app_decorate&#39;)
+  })
+}</code></pre>
+<p>2、获取乾坤配置的路由内在路由跳转时发送消息通知父应用</p>
+<pre><code class="javascript">router.afterEach
+/**
+ * 获取乾坤路由配置
+ * @param {string} base 路由前缀
+ */
+export const getQkRouter = (base, setGlobalState, state) =&gt; {
+  const subSiteRoutes = routesAll.map(r =&gt; {
+    r.path = base + r.path
+    return r
+  })
+  router.addRoutes(subSiteRoutes)
+  router.afterEach((route) =&gt; {
+    state.msgType = 0
+    state.msg = &#39;路由跳转&#39;
+    state.route = route
+    setGlobalState(state)
+  })
+  return router
+}</code></pre>
+<p>3、页面的路由根据需求加入meta参数开启关闭导航（isShowHeader， isShowFooter）</p>
+<pre><code class="javascript">routes
+{
+   path: &#39;/index&#39;,
+   name: &#39;index&#39;,
+   component: () =&gt; import(&#39;@/views/index/index&#39;),
+   meta: {
+     permission: &#39;&#39;,
+     title: &#39;首页&#39;,
+     vcode: vcodes.app_course,
+     functionCode: &#39;decorate_index_m&#39;,
+     page_id: &#39;decorate_index_m&#39;,
+     isShowHeader: true,
+     isShowFooter: true
+   }
+ }</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/blossomsun/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/" data-id="ckefjrl9r0009s0sx9ciz2ipb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" rel="tag">微前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/04/16/4.2%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          微前端相关(二)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2019/07/22/6%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何优化页面性能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ASP-NET/" rel="tag">ASP.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/my-review/" rel="tag">my review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/" rel="tag">vue 全家桶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%BE%BF%E6%8D%B7%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9/" rel="tag">便捷的第三方</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" rel="tag">兼容问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" rel="tag">微前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" rel="tag">杂七杂八的小问题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/ASP-NET/" style="font-size: 10px;">ASP.NET</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/my-review/" style="font-size: 10px;">my review</a> <a href="/blog/tags/vue/" style="font-size: 15px;">vue</a> <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/" style="font-size: 20px;">vue 全家桶</a> <a href="/blog/tags/%E4%BE%BF%E6%8D%B7%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9/" style="font-size: 10px;">便捷的第三方</a> <a href="/blog/tags/%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/" style="font-size: 10px;">兼容问题</a> <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">微前端</a> <a href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/blog/tags/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" style="font-size: 10px;">杂七杂八的小问题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">May 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 blossomsun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
