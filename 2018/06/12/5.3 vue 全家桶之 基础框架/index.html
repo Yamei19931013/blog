@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="全家桶之 Vuex, 优秀的 blossomsun">
+    <meta name="keywords" content="vue 全家桶之基础框架, 优秀的 blossomsun">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>全家桶之 Vuex | 优秀的 blossomsun</title>
+    <title>vue 全家桶之基础框架 | 优秀的 blossomsun</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -255,12 +255,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">全家桶之 Vuex</h1>
+                    <h1 class="description center-align post-title">vue 全家桶之基础框架</h1>
                 </div>
             </div>
         </div>
@@ -393,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-05-10
+                    2018-06-12
                 </div>
                 
 
@@ -409,153 +409,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、什么是-Vuex"><a href="#一、什么是-Vuex" class="headerlink" title="一、什么是 Vuex?"></a>一、什么是 Vuex?</h2><p>官方的解释： Vuex是一个专为Vue.js应用程序开发的状态管理模式<br>简单的说：可以理解为整个Vue程序中的全局变量。</p>
-<h2 id="二、为什么要用-Vuex"><a href="#二、为什么要用-Vuex" class="headerlink" title="二、为什么要用 Vuex?"></a>二、为什么要用 Vuex?</h2><p>应用场景：单页应用中，组件之间的数据状态。<br>优点：<br>1、当项目比较庞大的时候，每个组件的状态比较多，用了Vuex多层嵌套的组件、兄弟组件间的状态会更好管理维护。<br>2、缓存一些当前要使用请求远程或本地的数据集（刷新后会自己销毁）。<br>3、在2的基础上可以减少向服务器的请求，节省资源。 用户越多，资源节省越可观。<br>4、对开发者来说，如果你的项目足够复杂，团队的规模也不仅是一个人，数据集中处理更利于程序的稳定和维护。  </p>
-<h2 id="三、Vuex-特点"><a href="#三、Vuex-特点" class="headerlink" title="三、Vuex 特点?"></a>三、Vuex 特点?</h2><p>1、响应式更新；<br>2、不能直接修改Vuex中的变量，只能通过显式地commit=&gt;mutation来进行数据的改变；</p>
-<h2 id="四、如何使用-Vuex"><a href="#四、如何使用-Vuex" class="headerlink" title="四、如何使用 Vuex?"></a>四、如何使用 Vuex?</h2><h3 id="1、使用npm安装-npm-i-vuex-s"><a href="#1、使用npm安装-npm-i-vuex-s" class="headerlink" title="1、使用npm安装: npm i vuex -s"></a>1、使用npm安装: npm i vuex -s</h3><h3 id="2、初级用法"><a href="#2、初级用法" class="headerlink" title="2、初级用法"></a>2、初级用法</h3><p>2.1 在项目的根目录下新增一个store文件夹，在该文件夹内创建index.js<br>2.2 初始化store下index.js中的内容</p>
-<pre><code class="javascript">import Vue from &#39;vue&#39;
-import Vuex from &#39;vuex&#39;
-
-//挂载Vuex
-Vue.use(Vuex)
-
-//创建Vuex对象
-const store = new Vuex.Store({
-    state:{
-        //存放的键值对就是所要管理的状态
-        name:&#39;baiyun&#39;,
-        age: &#39;18&#39;
-    },
-    mutations: {
-      saveName(nameVal){
-        state.name = nameVal
-      },
-      saveAge(ageVal){
-        state.age = ageVal
-      }
-    }
-})
-
-export default store</code></pre>
-<p>2.3 在main.js 将store挂载到当前项目的Vue实例当中去</p>
-<pre><code class="javascript">import Vue from &#39;vue&#39;
-import App from &#39;./App&#39;
-import router from &#39;./router&#39;
-import store from &#39;./store&#39;
-
-Vue.config.productionTip = false
-
-/* eslint-disable no-new */
-new Vue({
-  el: &#39;#app&#39;,
-  router,
-  store,  //store:store 和router一样，将我们创建的Vuex实例挂载到这个vue实例中
-  render: h =&gt; h(App)
-})</code></pre>
-<p>2.4 在组件中使用Vuex: $store.state.name</p>
-<h3 id="3、高级用法"><a href="#3、高级用法" class="headerlink" title="3、高级用法"></a>3、高级用法</h3><p>在初级用法中，我们把所有东西都写在一个文件中，这样数据多的时候，耦合度太高，也不便于维护，而且mutations也不能解决异步问题，这里就介绍另一种方式以及actions（间接触发mutations方法的一种 “ 中间商 “，而且它可以执行异步操作，避免用户去直接操作state）。在src目录中，创建store文件，并创建Vuex中模块的文件名，每一个都单独拆分开，便于管理模块。<br>规范目录结构：</p>
-<pre><code class="javascript">store:.
-│  actions.js
-│  getters.js
-│  index.js
-│  mutations.js
-│  mutations_type.js   ##该项为存放mutaions方法常量的文件，按需要可加入
-│
-└─modules
-        index.js</code></pre>
-<p>一共涉及5种属性：State、 Getter、Mutation 、Action、 Module</p>
-<p>3.1 把Vuex看成一个仓库，仓库里面放了很多对象。其中state就是数据源存放地，对应于一般Vue对象里面的data。state里面存放的数据是响应式的，Vue组件从store中读取数据，若是store中的数据发生改变，依赖这个数据的组件也会发生更新。 </p>
-<p>state.js ：保存所有数据，以对象的方式导出</p>
-<pre><code class="javascript">export default {
-  name:&#39;baiyun&#39;, -- 默认值
-  age: &#39;18&#39; -- 默认值
-}</code></pre>
-<p>3.2 getters 可以对State进行计算操作，它就是Store的计算属性。虽然在组件内也可以做计算属性，但是getters 可以在多组件之间复用。如果一个状态只在一个组件内使用，是可以不用getters。<br>getters.js: 对state中的成员加工后传递给外界。<br>Getters中的方法有两个默认参数:<br> 1）state 当前Vuex对象中的状态对象<br> 2）getters 当前getters对象，用于将getters下的其他getter拿来用</p>
-<pre><code class="javascript">getters:{
-    nameInfo(state){
-        return &quot;姓名:&quot;+state.name
-    },
-    ageInfo(state,getters){
-        return getters.nameInfo+&#39;年龄:&#39;+state.age
-    }  
-}</code></pre>
-<p>组件中调用:</p>
-<pre><code class="javascript">this.$store.getters.fullInfo</code></pre>
-<p>3.3、mutations.js ：保存所有方法，用来改变state的数据</p>
-<pre><code class="javascript">// 保存当前姓名
-export const saveName = (state, name) =&gt; {
-  state.name = name;
-}
-// 保存当前年龄
-export const saveAge = (state, age) =&gt; {
-  state.age = age;
-}</code></pre>
-<p>3.4 actions中的方法有两个默认参数:<br> 1）context 上下文(相当于箭头函数中的this)对象<br> 2）payload 挂载参数<br>actions.js ：暴露给用户使用，借此触发mutations中的方法，保存数据（可执行异步操作）</p>
-<pre><code class="javascript">// 提交当前姓名
-export const saveName = ({ commit }, name) =&gt; {
-  commit(&#39;savePath&#39;, name);
-};
-
-// 提交当前年龄
-export const saveAge = ({ commit }, age) =&gt; {
-  commit(&#39;saveAge&#39;, age);
-};</code></pre>
-<p>在组件中调用:this.$store.dispatch(‘saveName’,{age:15})</p>
-<p>3.5 index.js：引入相应模块，暴露出store，供vue注册后全局使用</p>
-<pre><code class="javascript">
-import Vue from &#39;vue&#39;;
-import Vuex from &#39;vuex&#39;;
-import state from &#39;./state&#39;;
-import * as actions from &#39;./actions&#39;;
-import * as mutations from &#39;./mutations&#39;;
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  state,
-  actions,
-  mutations
-})</code></pre>
-<p>3.6 main.js中引入index.js</p>
-<pre><code class="javascript">// 引入vuex-store
-import store from &#39;./store/index&#39;;
-
-new Vue({
-  el: &#39;#app&#39;,
-  router,
-  store,
-  render: h =&gt; h(App)
-})</code></pre>
-<p>3.7 保存数据</p>
-<pre><code class="javascript">
-import { mapActions } from &#39;Vuex&#39;;
-
-// 2种方式
-
-// 方法一（dispatch）: 通过disptach派发给actions，让actions去触发
-this.$store.dispatch(&#39;saveName&#39;, this.DbSource);
-
-// 方法二（映射）
-// 1、通过methods方法添加映射关系 : 通过在methods中添加映射关系，数组方式，我们可以在数组中写多个方法（这里数组中的每一个方法名是actions.js文件中所定义的方法名）, 然后在需要使用的地方直接this.方法名即可。 当然，也可以直接绑定给html中的某个事件。值的注意的是，避免和methods中自己定义的其他方法的名字冲突
-methods: {
-    ...mapActions([&#39;saveName&#39;])
-  }
- // 2、使用 
-this.saveName</code></pre>
-<p>3.8 数据获取</p>
-<pre><code class="javascript">import { mapState } from &#39;Vuex&#39;;
-
-computed: {
-    ...mapState([&#39;saveName&#39;]),
-},
-watch: {
-    saveName(currVal) {
-        // 监听mapState中的变量，当数据变化（有值、值改变等），
-        // 保证能拿到完整的数据，不至于存在初始化没有数据的问题，然后可以赋给本组件data中的变量
-      this.currVal = currVal;
-    }
-}</code></pre>
-<h3 id="4、Vuex-namespaced的作用以及使用方式"><a href="#4、Vuex-namespaced的作用以及使用方式" class="headerlink" title="4、Vuex namespaced的作用以及使用方式"></a>4、Vuex namespaced的作用以及使用方式</h3><p>Vuex中的store分模块管理，需要在store的index.js中引入各个模块，为了解决不同模块命名冲突的问题，将不同模块的namespaced:true，之后在不同页面中引入getter、actions、mutations时，需要加上所属的模块名<br>4.1 声明分模块的store时加上namespaced:true<br>4.2 使用模块中的mutations、getters、actions时候，要加上模块名，例如使用commint执行mutations时, 格式：模块名/模块中的mutations<br>4.3、获取属性时同样加上模块名,格式：$store.state.模块名.模块属性</p>
+                <p><a href="链接网址">全家桶之 vuex</a></p>
 
             </div>
             <hr/>
@@ -581,7 +435,7 @@ watch: {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2020/05/10/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/">https://github.com/blossomsun/blog/blog/2020/05/10/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2018/06/12/5.3%20vue%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6/">https://github.com/blossomsun/blog/blog/2018/06/12/5.3%20vue%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -792,26 +646,24 @@ watch: {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/blog/2020/08/22/5.3.2%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue-Router/">
+                <a href="/blog/2018/06/17/5.3.1%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20vuex%20/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/8.jpg" class="responsive-img" alt="全家桶之 Vue Router">
+                        <img src="/blog/medias/featureimages/7.jpg" class="responsive-img" alt="全家桶之 Vuex">
                         
-                        <span class="card-title">全家桶之 Vue Router</span>
+                        <span class="card-title">全家桶之 Vuex</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、什么是 Vue Router?Vue Router 就是路由管理器。
-路由中的三个基本的概念：1、route：一条路由；2、routes： 是一组路由；3、router: 一个机制，相当于一个管理者，来管理路由；
-客户端路由有两种实现方
+                            Vue 配套的前端状态管理库
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-06-17
                         </span>
                         <span class="publish-author">
                             
@@ -839,25 +691,27 @@ watch: {
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2020/05/10/5.3%20vue%20%E5%85%A8%E5%AE%B6%E6%A1%B6/">
+                <a href="/blog/2017/08/21/5.1Vue%E5%8E%9F%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/.jpg" class="responsive-img" alt="vue 全家桶">
+                        <img src="/blog/medias/featureimages/5.jpg" class="responsive-img" alt="Vue原理">
                         
-                        <span class="card-title">vue 全家桶</span>
+                        <span class="card-title">Vue原理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            全家桶之 vuex
+                            1、观察者   — vue2、脏检查   — ng
+class MyVue {  contructor (options) {
+  }}
 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-08-21
                             </span>
                         <span class="publish-author">
                             
@@ -870,8 +724,8 @@ watch: {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                        <span class="chip bg-color">vue 全家桶</span>
+                    <a href="/blog/tags/vue/">
+                        <span class="chip bg-color">vue</span>
                     </a>
                     
                 </div>
