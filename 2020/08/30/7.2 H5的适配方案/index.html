@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="全家桶之 axios, 爱举重的拓跋英勋">
+    <meta name="keywords" content="H5的适配方案, 爱举重的拓跋英勋">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>全家桶之 axios | 爱举重的拓跋英勋</title>
+    <title>H5的适配方案 | 爱举重的拓跋英勋</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -255,12 +255,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">全家桶之 axios</h1>
+                    <h1 class="description center-align post-title">H5的适配方案</h1>
                 </div>
             </div>
         </div>
@@ -377,8 +377,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                                <span class="chip bg-color">vue 全家桶</span>
+                            <a href="/blog/tags/css/">
+                                <span class="chip bg-color">css</span>
                             </a>
                         
                     </div>
@@ -393,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-08-22
+                    2020-08-30
                 </div>
                 
 
@@ -409,32 +409,53 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、什么是-axios"><a href="#一、什么是-axios" class="headerlink" title="一、什么是 axios?"></a>一、什么是 axios?</h2><p>官方定义：axios 是一个基于 promise（是一个对象用来传递异步操作的信息） 的 HTTP 库，可以用在浏览器和 node.js 中。<br>简单地说：axios 是用来实现页面和web服务器之间数据的异步传输。<br>axios出现之前，我们实现页面和web服务器之间数据的交互方法有ajax、fetch。</p>
-<h4 id="ajax、axios、fetch的区别："><a href="#ajax、axios、fetch的区别：" class="headerlink" title="ajax、axios、fetch的区别："></a>ajax、axios、fetch的区别：</h4><h5 id="1、ajax"><a href="#1、ajax" class="headerlink" title="1、ajax"></a>1、ajax</h5><p>1.1 传统 Ajax 指的是 XMLHttpRequest（XHR）， 最早出现的发送后端请求技术，隶属于原始js中，核心使用XMLHttpRequest对象，多个请求之间如果有先后关系的话，就会出现回调地狱。<br>JQuery ajax 是对原生XHR的封装，除此以外还增添了对JSONP的支持。</p>
-<p>1.2 缺点：<br>1）本身是针对MVC的编程,不符合现在前端MVVM的浪潮<br>2）基于原生的XHR开发，XHR本身的架构不清晰。<br>3）JQuery整个项目太大，单纯使用ajax却要引入整个JQuery非常的不合理（采取个性化打包的方案又不能享受CDN服务）<br>4）不符合关注分离（Separation of Concerns）的原则<br>5）配置和调用方式非常混乱，而且基于事件的异步模型不友好。</p>
-<h5 id="2、axios"><a href="#2、axios" class="headerlink" title="2、axios"></a>2、axios</h5><p>2.1 axios 本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。</p>
-<p>2.2 特征：<br>1）从浏览器中创建 XMLHttpRequest<br>2）支持 Promise API<br>3）客户端支持防止CSRF<br>4）提供了一些并发请求的接口（重要，方便了很多的操作）<br>5）从 node.js 创建 http 请求<br>6）拦截请求和响应<br>7）转换请求和响应数据<br>8）取消请求<br>9）自动转换JSON数据</p>
-<h5 id="3-fetch"><a href="#3-fetch" class="headerlink" title="3.fetch"></a>3.fetch</h5><p>3.1<br>fetch是在ES6出现的，使用了ES6中的promise对象，是基于promise设计的。Fetch的代码结构比起ajax简单多了，参数有点像jQuery ajax。但是，fetch不是ajax的进一步封装，而是原生js，没有使用XMLHttpRequest对象。</p>
-<p>3.2 优点<br> 1） 语法简洁，更加语义化<br> 2） 基于标准 Promise 实现，支持 async/await<br> 3） 同构方便，使用 <a href="https://github.com/matthew-andrews/isomorphic-fetch">isomorphic-fetch</a><br> 4） 更加底层，提供的API丰富（request, response）<br> 5） 脱离了XHR，是ES规范里新的实现方式</p>
-<p>3.3 缺点<br> 1）fetch的兼容性并不太好,ie 和 safari 都不支持；<br> 2）fetch是一个低层次的API，你可以把它考虑成原生的XHR，所以使用起来并不是那么舒服，需要进行封装；</p>
-<h2 id="一、axios-如何使用"><a href="#一、axios-如何使用" class="headerlink" title="一、axios 如何使用?"></a>一、axios 如何使用?</h2><h5 id="1、拦截器设置"><a href="#1、拦截器设置" class="headerlink" title="1、拦截器设置"></a>1、拦截器设置</h5><pre><code class="javascript"> // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
-    // 在发送请求之前做些什么
-    return config;
-  }, function (error) {
-    // 对请求错误做些什么
-    return Promise.reject(error);
-  });
+                <h2 id="一、一些基本概念"><a href="#一、一些基本概念" class="headerlink" title="一、一些基本概念"></a>一、一些基本概念</h2><h4 id="1、前端开发涉及到的单位"><a href="#1、前端开发涉及到的单位" class="headerlink" title="1、前端开发涉及到的单位"></a>1、前端开发涉及到的单位</h4><p>· dpr（device pixel ratio）：即 横向或者纵向设备物理像素数量与设备独立像素数量的比值，浏览器中可以通过window.devicePixelRatio获取(存在兼容性问题)。<br>· px（像素）：有两种像素概念，一种是网页设计中使用的css像素，一种是原生移动系统使用的物理像素。作为css像素时，表示的也是一种设备无关单位，默认情况下与系统分辨率下的像素大小相同。标清设备中，一个css像素和一个设备物理像素大小相同；在高清设备中，一个css像素可以大于或者等于多个设备物理像素，具体一个css像素，需要多少个物理像素来展示，浏览器会根据dpr计算。<br>· em（相对单位）：CSS2引入的单位，作为字体大小使用时和百分比单位类似，都是相对于最近的父元素设置的字体大小，在body上设置字体大小为100%和设置字体大小为1em是一样的效果，默认情况下浏览器的字体大小为16px，这样只要浏览器默认得字体大小不变，1em = 16px。<br> · rem（相对单位 root em）：作用和em类似，不过他们的相对对象不一样，em是相对父元素的，rem是相对html根节点的，即所有使用rem单位的子元素的字体大小都是相对根节点的，所以使用rem可以避免使用em带来的子元素字体大小逐层复合的连锁反应。</p>
+<h4 id="2、viewport"><a href="#2、viewport" class="headerlink" title="2、viewport"></a>2、viewport</h4><p> 手机浏览器是把页面放在一个虚拟的“窗口”（viewport）中，通常这个虚拟的“窗口”（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中，也不会破坏没有针对手机浏览器优化的网页的布局，用户可以通过平移和缩放来看网页的不同部分。移动版的 Safari 浏览器最新引进了viewport 这个 meta tag，让网页开发者来控制 viewport 的大小和缩放，其他手机浏览器也基本支持。 viewport可以无视设备的真实分辨率，直接通过dpi，在物理尺寸和浏览器之间重设分辨率，这个分辨率和设备的分辨率无关。</p>
+<p> viewport元标签极其属性：</p>
+<pre><code class="javascript"> &lt;meta id=&quot;viewport&quot; name=&quot;viewport&quot; content=&quot;width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;&quot;&gt;</code></pre>
+<p> · width<br> 控制viewport的大小，可以指定一个值，如600， 或者特殊的值，如device-width为设备的宽度（单位是缩放为100%的CSS的像素）<br>· height<br>和width相对应，指定高度<br>· initial-scale<br>初始缩放比例，页面第一次加载时的缩放比例<br>·maximum-scale<br>允许用户缩放到的最大比例，范围从0到10.0，默认值是0.5<br>·minimum-scale<br>允许用户缩放到的最小比例，范围从0到10.0，默认值是0.5<br>·user-scalable<br>用户是否可以手动缩放，值可以是：①yes、 true允许用户缩放；②no、false不允许用户缩放</p>
+<h2 id="二、页面中那些内容需要适配"><a href="#二、页面中那些内容需要适配" class="headerlink" title="二、页面中那些内容需要适配"></a>二、页面中那些内容需要适配</h2><h4 id="1、图片高清适配"><a href="#1、图片高清适配" class="headerlink" title="1、图片高清适配"></a>1、图片高清适配</h4><p>要想高清显示图片，如果条件允许(有单独的图片服务器)最直接的解决办法，肯定是根据设备的dpr，为不同dpr的设备加载不同倍率大小图片显示；没这种条件的或者对用户体验没有很高要求的，只能选一种折中的方案了，一般情况下只需要提供布局尺寸2倍大小的切图就可以了，也就是只高清适配dpr=2的设备，但是dpr为3或者4的设备展示效果也能接受，不容易看出来模糊现象。目前主流机型的dpr也就在2和3之间。</p>
+<h4 id="2、字体大小适配"><a href="#2、字体大小适配" class="headerlink" title="2、字体大小适配"></a>2、字体大小适配</h4><p> 字体适配目标主要还是看设计要求，主要有两种：<br> 2.1、不同屏幕下，字体显示大小都一样，即需要等宽显示字体；<br> 2.2、不同屏幕下，一行能显示的字数固定，即需要按比例缩放字体大小；</p>
+<h4 id="3、布局宽度适配"><a href="#3、布局宽度适配" class="headerlink" title="3、布局宽度适配"></a>3、布局宽度适配</h4><h2 id="三、如何解决适配"><a href="#三、如何解决适配" class="headerlink" title="三、如何解决适配"></a>三、如何解决适配</h2><h4 id="1、引入淘宝开源的可伸缩布局方案-flexible"><a href="#1、引入淘宝开源的可伸缩布局方案-flexible" class="headerlink" title="1、引入淘宝开源的可伸缩布局方案 flexible"></a>1、引入淘宝开源的可伸缩布局方案 flexible</h4><p>· 动态设置viewport的scale<br>· 动态计算html的font-size<br>· 布局的时候，各元素的css尺寸=设计稿标注尺寸/设计稿横向分辨率/10<br>· font-size需要额外的媒介查询，并且font-size不使用rem</p>
+<h4 id="2、js动态生成viewport标签"><a href="#2、js动态生成viewport标签" class="headerlink" title="2、js动态生成viewport标签"></a>2、js动态生成viewport标签</h4><p>标签中的initial-scale值根据设备的dpr计算，不同dpr设备的viewport值不同</p>
+<h4 id="3、Media-Queries"><a href="#3、Media-Queries" class="headerlink" title="3、Media Queries"></a>3、Media Queries</h4><p>根据css的媒体查询动态设置根部html字体大小</p>
+<h4 id="4、rem-viewport-缩放"><a href="#4、rem-viewport-缩放" class="headerlink" title="4、rem + viewport 缩放"></a>4、rem + viewport 缩放</h4><p>根据rem将页面放大dpr倍, 然后viewport设置为1/dpr。</p>
+<h4 id="5、rem实现"><a href="#5、rem实现" class="headerlink" title="5、rem实现"></a>5、rem实现</h4><p>· viewport是固定的</p>
+<pre><code class="jvascript">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no&quot;&gt;</code></pre>
+<p>· 控制rem基准值（设计稿以720px宽度量取实际尺寸）</p>
+<pre><code class="javascript">!function (d) {
+    var c = d.document;
+    var a = c.documentElement;
+    var b = d.devicePixelRatio;
+    var f;
 
-// 添加响应拦截器
-axios.interceptors.response.use(function (response) {
-    // 对响应数据做点什么
-    return response;
-  }, function (error) {
-    // 对响应错误做点什么
-    return Promise.reject(error);
-  });</code></pre>
-<h5 id="2、上传文件处理"><a href="#2、上传文件处理" class="headerlink" title="2、上传文件处理"></a>2、上传文件处理</h5><p> creat一个纯净的axios请求，挂载到vue原型里</p>
+    function e() {
+      var h = a.getBoundingClientRect().width, g;
+      if (b === 1) {
+        h = 720
+      }
+      if(h&gt;720) h = 720;//设置基准值的极限值
+      g = h / 7.2;
+      a.style.fontSize = g + &quot;px&quot;
+    }
+
+    if (b &gt; 2) {
+      b = 3
+    } else {
+      if (b &gt; 1) {
+        b = 2
+      } else {
+        b = 1
+      }
+    }
+    a.setAttribute(&quot;data-dpr&quot;, b);
+    d.addEventListener(&quot;resize&quot;, function () {
+      clearTimeout(f);
+      f = setTimeout(e, 200)
+    }, false);
+    e()
+  }(window);</code></pre>
+<p>· css通过sass预编译，设置量取的px值转化rem的变量$px: (1/100)+rem;</p>
 
             </div>
             <hr/>
@@ -460,7 +481,7 @@ axios.interceptors.response.use(function (response) {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2019/08/22/5.3.3%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20axios/">https://github.com/blossomsun/blog/blog/2019/08/22/5.3.3%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20axios/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2020/08/30/7.2%20H5%E7%9A%84%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/">https://github.com/blossomsun/blog/blog/2020/08/30/7.2%20H5%E7%9A%84%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -498,8 +519,8 @@ axios.interceptors.response.use(function (response) {
                     
                         <div class="article-tag">
                             
-                                <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                                    <span class="chip bg-color">vue 全家桶</span>
+                                <a href="/blog/tags/css/">
+                                    <span class="chip bg-color">css</span>
                                 </a>
                             
                         </div>
@@ -667,29 +688,30 @@ axios.interceptors.response.use(function (response) {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/blog/2019/08/22/5.3.4%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue%20CLI/">
+                <a href="/blog/2020/08/30/7.2%20H5%E7%9A%84%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/15.jpg" class="responsive-img" alt="全家桶之 Vue CLI">
+                        <img src="/blog/medias/featureimages/1.jpg" class="responsive-img" alt="H5的适配方案">
                         
-                        <span class="card-title">全家桶之 Vue CLI</span>
+                        <span class="card-title">H5的适配方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            脚手架工具，帮你快速上手 Vue 开发，无需再花多余时间去实现项目架构
+                            如何设计代码，让不同分辨率、不同设备都完美展示？
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -698,11 +720,12 @@ axios.interceptors.response.use(function (response) {
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                        <span class="chip bg-color">vue 全家桶</span>
+                    <a href="/blog/tags/css/">
+                        <span class="chip bg-color">css</span>
                     </a>
                     
                 </div>
@@ -716,29 +739,33 @@ axios.interceptors.response.use(function (response) {
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2019/08/22/5.3.2%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue-Router/">
+                <a href="/blog/2020/08/23/7.1%20CSS%E4%B9%8B%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E4%B8%8E%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/8.jpg" class="responsive-img" alt="全家桶之 Vue Router">
+                        <img src="/blog/medias/featureimages/13.jpg" class="responsive-img" alt="CSS之 定位(position)">
                         
-                        <span class="card-title">全家桶之 Vue Router</span>
+                        <span class="card-title">CSS之 定位(position)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Vue 官方的路由插件，构建单页面应用必不可少
+                            css的position属性详解
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-23
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            blossomsun
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/blog/categories/css/" class="post-category">
+                                    css
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -746,8 +773,8 @@ axios.interceptors.response.use(function (response) {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                        <span class="chip bg-color">vue 全家桶</span>
+                    <a href="/blog/tags/css/">
+                        <span class="chip bg-color">css</span>
                     </a>
                     
                 </div>
