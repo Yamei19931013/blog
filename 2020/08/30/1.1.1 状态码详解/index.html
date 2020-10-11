@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="微前端相关(二), 爱举重的拓跋英勋">
+    <meta name="keywords" content="状态码详解, 爱举重的拓跋英勋">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>微前端相关(二) | 爱举重的拓跋英勋</title>
+    <title>状态码详解 | 爱举重的拓跋英勋</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/common.css">
 
     <script src="/blog/libs/jquery/jquery.min.js"></script>
 
@@ -242,7 +243,7 @@
 <script src="/blog/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = 'wym.com';
+        let pwd = '';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -255,12 +256,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">微前端相关(二)</h1>
+                    <h1 class="description center-align post-title">状态码详解</h1>
                 </div>
             </div>
         </div>
@@ -377,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                                <span class="chip bg-color">微前端</span>
+                            <a href="/blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
                             </a>
                         
                     </div>
@@ -393,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-04-16
+                    2020-08-30
                 </div>
                 
 
@@ -409,133 +410,236 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>背景及问题<br>站点是由多站点组合架构，每个站点都由SPA架构。站点间的跳转都是通过href跳转，这样就导致有如下几点缺点：</p>
-<p>1、公共组件代码没法抽离<br>2、公共导航和布局不能共用<br>3、无法保证单页应用的体验</p>
-<p>技术选型<br>市面上所有微前端开发的子应用技术栈都无限制。</p>
-<p>Nginx的路由分发规则</p>
-<p>该规则要有特点的私有前缀，同时增应用得配置Nginx配置文件</p>
-<p>Iframe嵌入</p>
-<p>页面刷新无法保证子应用的路由状态，同时Iframe适配存在问题</p>
-<p>SingleSPA</p>
-<p>所有资源文件打包成JS，无法并行加载，全局变量污染，样式污染，监听污染</p>
-<p>qiankun</p>
-<p>基于SingleSPA，同时集成JS运行时沙箱和样式隔离，完全的无技术栈依赖</p>
-<p>icestark</p>
-<p>无基础依赖，但是主应用必须基于React开发</p>
-<p>综合上述问题，采用qiankun方案作为微前端架构基础。</p>
-<p>主框架<br>1、安装</p>
-<pre><code class="javascript">npm install qiankun --save</code></pre>
-<p>2、主应用配置<br>在入口文件增加以下代码</p>
-<pre><code class="javascript">import { registerMicroApps, start } from &#39;qiankun&#39;;
-
-// register the sub apps
-registerMicroApps([
-{
-    name: &#39;vueApp&#39;,
-    entry: &#39;//localhost:7100&#39;, // 子应用网站地址
-    container: &#39;#container&#39;,
-    activeRule: &#39;/vue&#39;,
-    props: {} // 自定义通信用数据接口，实现模块等下发
-}
-]);
-
-start();</code></pre>
-<p>3、子应用配置<br>webpack配置</p>
-<pre><code class="javascript">const packageName = require(&#39;./package.json&#39;).name;
-
-module.exports = {
-    output: {
-        library: `${packageName}-[name]`,
-        libraryTarget: &#39;umd&#39;,
-        jsonpFunction: `webpackJsonp_${packageName}`   
-    }
-};</code></pre>
-<p>入口文件增加钩子函数</p>
-<pre><code class="javascript">
-export async function bootstrap() {
-    console.log(&#39;app bootstraped&#39;);
-}
-
-export async function mount(props) { // 接收父组件注册时props参数
-    console.log(JSON.stringify(props));
-}
-
-export async function unmount() {
-}
-
-export async function update(props) {
-    console.log(&#39;update props&#39;, props);
-}</code></pre>
-<p>4、应用间通信</p>
-<pre><code class="javascript">import { initGlobalState } from &#39;qiankun&#39;
-const { onGlobalStateChange, setGlobalState } = initGlobalState({ // 主应用注册全局状态，再将示例下发给各个子应用
-  msg: &#39;消息&#39;,
-});
-
-
-setGlobalState({ msg: &#39;消息&#39; }); // 触发变更
-onGlobalStateChange((value, prev) =&gt; { // 监听变更
-  console.log(&#39;[onGlobalStateChange]:&#39;, value, prev);
-});</code></pre>
-<p>5、在已发布的主网站调试本地子站项目<br>假设子站的配置信息如下:</p>
-<pre><code class="javascript">
-sites = [
-  {
-    name: &quot;demo&quot;,
-    entry: &#39;//localhost:8001&#39;,
-    container: &#39;#main&#39;,
-    activeRule: &#39;/demo&#39;,
-    ...
-  }
-]</code></pre>
-<p>6、可以通过在localstorage中加入自定义变量的方式将子应用的地址改成本地：</p>
-<pre><code class="javascript">if(process.env.NODE_ENV === &#39;development&#39;) {
-  const customSetting = {}
-  customSetting.app = localStorage.getItem(&#39;app&#39;)
-  customSetting.entry = localStorage.getItem(&#39;entry&#39;)
-  const {app, entry} = customSetting
-  if(app &amp;&amp; entry) {
-    let item = sites.find(node =&gt; node.name === app)
-    console.log(&#39;find&#39;, item)
-    if(item) {
-      item.entry = entry;
-    }
-  }
-}</code></pre>
-<p>7、注意点：<br>主应用的容器id不能与子应用的容器id相同 ，vue脚手架生成的项目容器id为app,  框架的容器id需要修改为不同的值<br>子项目存在异步加载的js时要将publicPath设置为实际的域名<br>子应用可以通过window.<strong>POWERED_BY_QIANKUN</strong>变量判断是否时从乾坤框架加载<br>部署时子应用网站需要设置Access-Control-Allow-Origin请求体，不然请求子应用静态资源时会失败<br>activeRule传入字符串或者数组时，浏览器传入地址的pathname必须以’/‘结尾，否则无法匹配，使用函数方式则没有这个问题 ： </p>
-<pre><code class="javascript">activeRule: location =&gt; location.pathname.startsWith(&#39;/vue&#39;)</code></pre>
-<p>qiankun加载微应用的模式为history模式，所以需要进行服务器配置, 以nginx为例： </p>
-<pre><code class="javascript">
-server {
-    listen 8002;
-
-    server_name localhost;
-
-    location / {
-
-        root /Volumes/aigo/qiankun_demo/mainapp/dist;
-
-        index index.html index.htm;
-
-        try_files $uri $uri/ /index.html;  # 重点，让服务器端对该网站的响应都为index.html
-    }
-}</code></pre>
-<p>设置sandbox为{ strictStyleIsolation: true }时，子应用挂载元素需要做特殊处理，例如：</p>
-<pre><code class="javascript">render(props) {
-    const el = (props &amp;&amp; props.container &amp;&amp; props.container.nodeType === 11) ? props.container.querySelector(&#39;#app&#39;) : &#39;#app&#39;
-    new Vue({
-        el,
-        router,
-        components: { App },
-        template: &#39;&lt;App /&gt;&#39;
-    })
-}</code></pre>
-<p>如果子应用在开发时需要直接与主框架联调，为了解决跨域问题，需要设置 ：</p>
-<pre><code class="javascript">devServer: {
-    headers: {
-        &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;
-    }
-}</code></pre>
+                <h2 id="一、HTTP状态码分类"><a href="#一、HTTP状态码分类" class="headerlink" title="一、HTTP状态码分类"></a>一、HTTP状态码分类</h2><p>HTTP状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP状态码共分为5种类型：</p>
+<table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1**</td>
+<td align="center">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td align="center">2**</td>
+<td align="center">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td align="center">3**</td>
+<td align="center">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td align="center">4**</td>
+<td align="center">客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td align="center">5**</td>
+<td align="center">服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<p>常用HTTP状态码列表:</p>
+<table>
+<thead>
+<tr>
+<th align="center">状态码</th>
+<th align="left">状态码英文名称</th>
+<th align="left">中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">200</td>
+<td align="left">OK</td>
+<td align="left">一般用于GET与POST请求</td>
+</tr>
+<tr>
+<td align="center">201</td>
+<td align="left">Created</td>
+<td align="left">已创建。成功请求并创建了新的资源</td>
+</tr>
+<tr>
+<td align="center">202</td>
+<td align="left">Accepted</td>
+<td align="left">已接受。已经接受请求，但未处理完成</td>
+</tr>
+<tr>
+<td align="center">203</td>
+<td align="left">Non-Authoritative Information</td>
+<td align="left">非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本</td>
+</tr>
+<tr>
+<td align="center">204</td>
+<td align="left">No Content</td>
+<td align="left">无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档</td>
+</tr>
+<tr>
+<td align="center">205</td>
+<td align="left">Reset Content</td>
+<td align="left">重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域</td>
+</tr>
+<tr>
+<td align="center">206</td>
+<td align="left">206</td>
+<td align="left">部分内容。服务器成功处理了部分GET请求</td>
+</tr>
+<tr>
+<td align="center">301</td>
+<td align="left">Moved Permanently</td>
+<td align="left">永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</td>
+</tr>
+<tr>
+<td align="center">302</td>
+<td align="left">Found</td>
+<td align="left">临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</td>
+</tr>
+<tr>
+<td align="center">303</td>
+<td align="left">See Other</td>
+<td align="left">查看其它地址。与301类似。使用GET和POST请求查看</td>
+</tr>
+<tr>
+<td align="center">304</td>
+<td align="left">Not Modified</td>
+<td align="left">未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源</td>
+</tr>
+<tr>
+<td align="center">305</td>
+<td align="left">Use Proxy</td>
+<td align="left">使用代理。所请求的资源必须通过代理访问</td>
+</tr>
+<tr>
+<td align="center">306</td>
+<td align="left">Unused</td>
+<td align="left">已经被废弃的HTTP状态码</td>
+</tr>
+<tr>
+<td align="center">307</td>
+<td align="left">Temporary Redirect</td>
+<td align="left">临时重定向。与302类似。使用GET请求重定向</td>
+</tr>
+<tr>
+<td align="center">400</td>
+<td align="left">Bad Request</td>
+<td align="left">客户端请求的语法错误，服务器无法理解</td>
+</tr>
+<tr>
+<td align="center">401</td>
+<td align="left">Unauthorized</td>
+<td align="left">请求要求用户的身份认证</td>
+</tr>
+<tr>
+<td align="center">402</td>
+<td align="left">Payment Required</td>
+<td align="left">保留，将来使用</td>
+</tr>
+<tr>
+<td align="center">403</td>
+<td align="left">Forbidden</td>
+<td align="left">服务器理解请求客户端的请求，但是拒绝执行此请求</td>
+</tr>
+<tr>
+<td align="center">404</td>
+<td align="left">Not Found</td>
+<td align="left">服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置”您所请求的资源无法找到”的个性页面</td>
+</tr>
+<tr>
+<td align="center">405</td>
+<td align="left">Method Not Allowed</td>
+<td align="left">客户端请求中的方法被禁止</td>
+</tr>
+<tr>
+<td align="center">406</td>
+<td align="left">Not Acceptable</td>
+<td align="left">服务器无法根据客户端请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td align="center">407</td>
+<td align="left">Proxy Authentication Required</td>
+<td align="left">请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权</td>
+</tr>
+<tr>
+<td align="center">408</td>
+<td align="left">Request Time-out</td>
+<td align="left">服务器等待客户端发送的请求时间过长，超时</td>
+</tr>
+<tr>
+<td align="center">409</td>
+<td align="left">Conflict</td>
+<td align="left">服务器完成客户端的 PUT 请求时可能返回此代码，服务器处理请求时发生了冲突</td>
+</tr>
+<tr>
+<td align="center">410</td>
+<td align="left">Gone</td>
+<td align="left">客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置</td>
+</tr>
+<tr>
+<td align="center">411</td>
+<td align="left">Length Required</td>
+<td align="left">服务器无法处理客户端发送的不带Content-Length的请求信息</td>
+</tr>
+<tr>
+<td align="center">412</td>
+<td align="left">Precondition Failed</td>
+<td align="left">客户端请求信息的先决条件错误</td>
+</tr>
+<tr>
+<td align="center">413</td>
+<td align="left">Request Entity Too Large</td>
+<td align="left">由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息</td>
+</tr>
+<tr>
+<td align="center">414</td>
+<td align="left">Request-URI Too Large</td>
+<td align="left">请求的URI过长（URI通常为网址），服务器无法处理</td>
+</tr>
+<tr>
+<td align="center">415</td>
+<td align="left">Unsupported Media Type</td>
+<td align="left">服务器无法处理请求附带的媒体格式</td>
+</tr>
+<tr>
+<td align="center">416</td>
+<td align="left">Requested range not satisfiable</td>
+<td align="left">客户端请求的范围无效</td>
+</tr>
+<tr>
+<td align="center">417</td>
+<td align="left">Expectation Failed</td>
+<td align="left">服务器无法满足Expect的请求头信息</td>
+</tr>
+<tr>
+<td align="center">500</td>
+<td align="left">Internal Server Error</td>
+<td align="left">服务器内部错误，无法完成请求</td>
+</tr>
+<tr>
+<td align="center">501</td>
+<td align="left">Not Implemented</td>
+<td align="left">服务器不支持请求的功能，无法完成请求</td>
+</tr>
+<tr>
+<td align="center">502</td>
+<td align="left">Bad Gateway</td>
+<td align="left">作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应</td>
+</tr>
+<tr>
+<td align="center">503</td>
+<td align="left">Service Unavailable</td>
+<td align="left">由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
+</tr>
+<tr>
+<td align="center">504</td>
+<td align="left">Gateway Time-out</td>
+<td align="left">充当网关或代理的服务器，未及时从远端服务器获取请求</td>
+</tr>
+<tr>
+<td align="center">505</td>
+<td align="left">HTTP Version not supported</td>
+<td align="left">服务器不支持请求的HTTP协议的版本，无法完成处理</td>
+</tr>
+</tbody></table>
+<p>—– 摘抄自<a href="http://www.runoob.com" target="_blank" rel="noopener">www.runoob.com</a></p>
 
             </div>
             <hr/>
@@ -561,7 +665,7 @@ server {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2020/04/16/4.2%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/">https://github.com/blossomsun/blog/blog/2020/04/16/4.2%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2020/08/30/1.1.1%20%E7%8A%B6%E6%80%81%E7%A0%81%E8%AF%A6%E8%A7%A3/">https://github.com/blossomsun/blog/blog/2020/08/30/1.1.1%20%E7%8A%B6%E6%80%81%E7%A0%81%E8%AF%A6%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -599,8 +703,8 @@ server {
                     
                         <div class="article-tag">
                             
-                                <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                                    <span class="chip bg-color">微前端</span>
+                                <a href="/blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
                                 </a>
                             
                         </div>
@@ -772,24 +876,24 @@ server {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/blog/2020/05/05/1.2%20%E6%80%BB%E7%BB%93/">
+                <a href="/blog/2020/09/22/9.1%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/.jpg" class="responsive-img" alt="20200505总结">
+                        <img src="/blog/medias/featureimages/13.jpg" class="responsive-img" alt="浅谈前端工程化">
                         
-                        <span class="card-title">20200505总结</span>
+                        <span class="card-title">浅谈前端工程化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总结
+                            谈谈前端工程化
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-05
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-22
                         </span>
                         <span class="publish-author">
                             
@@ -802,8 +906,8 @@ server {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/my-review/">
-                        <span class="chip bg-color">my review</span>
+                    <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">前端工程</span>
                     </a>
                     
                 </div>
@@ -817,24 +921,24 @@ server {
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/">
+                <a href="/blog/2020/08/30/7.2%20H5%E7%9A%84%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/14.jpg" class="responsive-img" alt="微前端相关（一）">
+                        <img src="/blog/medias/featureimages/1.jpg" class="responsive-img" alt="H5的适配方案">
                         
-                        <span class="card-title">微前端相关（一）</span>
+                        <span class="card-title">H5的适配方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            微前端架构
+                            如何设计代码，让不同分辨率、不同设备都完美展示？
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
                             </span>
                         <span class="publish-author">
                             
@@ -847,8 +951,8 @@ server {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                        <span class="chip bg-color">微前端</span>
+                    <a href="/blog/tags/css/">
+                        <span class="chip bg-color">css</span>
                     </a>
                     
                 </div>
@@ -1029,12 +1133,12 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                    type="playlist"
                    id="503838841"
                    fixed='true'
-                   autoplay='false'
+                   autoplay='true'
                    theme='#42b983'
                    loop='all'
                    order='random'
                    preload='auto'
-                   volume='0.7'
+                   volume='0.5'
                    list-folded='true'
         >
         </meting-js>
@@ -1051,7 +1155,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2019</span>
             <a href="/blog/about" target="_blank">blossomsun</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="#" target="_blank">Matery</a>
             <br>
             
             

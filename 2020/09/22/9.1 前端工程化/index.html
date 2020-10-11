@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="如何优化页面性能, 爱举重的拓跋英勋">
+    <meta name="keywords" content="浅谈前端工程化, 爱举重的拓跋英勋">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>如何优化页面性能 | 爱举重的拓跋英勋</title>
+    <title>浅谈前端工程化 | 爱举重的拓跋英勋</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -243,7 +243,7 @@
 <script src="/blog/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = 'wym.com';
+        let pwd = '';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！');
@@ -256,12 +256,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">如何优化页面性能</h1>
+                    <h1 class="description center-align post-title">浅谈前端工程化</h1>
                 </div>
             </div>
         </div>
@@ -378,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
-                                <span class="chip bg-color">性能优化</span>
+                            <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/">
+                                <span class="chip bg-color">前端工程</span>
                             </a>
                         
                     </div>
@@ -394,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-07-22
+                    2020-09-22
                 </div>
                 
 
@@ -410,17 +410,25 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、什么是性能？"><a href="#一、什么是性能？" class="headerlink" title="一、什么是性能？"></a>一、什么是性能？</h2><h4 id="1、直观体现："><a href="#1、直观体现：" class="headerlink" title="1、直观体现："></a>1、直观体现：</h4><p>页面加载、操作的流畅度</p>
-<h4 id="2、评判指标："><a href="#2、评判指标：" class="headerlink" title="2、评判指标："></a>2、评判指标：</h4><p>业界常用的指标是白屏、首屏、可交互时间和整页时间四个指标。我们可以通过performance API获取到响应的指标值。</p>
-<h5 id="2-1-白屏"><a href="#2-1-白屏" class="headerlink" title="2.1 白屏"></a>2.1 白屏</h5><p>指页面接收首字节时长(TTFB: time to first byte)。从浏览器发起请求到开始显示第一个页面元素的时间。现代浏览器不会等待CSS树（所有CSS文件下载和解析完成）和DOM树（整个body标签解析完成）构建完成才开始绘制，而是马上开始显示中间结果。所以经常在低网速的环境中，观察到页面由上至下缓慢显示完，或者先显示文本内容后再重绘成带有格式的页面内容。</p>
-<h5 id="2-2-首屏"><a href="#2-2-首屏" class="headerlink" title="2.2 首屏"></a>2.2 首屏</h5><p>首屏时间（FirstScreen Time），是指用户看到第一屏，即整个网页顶部大小为当前窗口的区域，显示完整的时间。常用的方法有，页面标签标记法、图像相似度比较法和首屏高度内图片加载法。</p>
-<h5 id="2-3-可交互时间（domready）"><a href="#2-3-可交互时间（domready）" class="headerlink" title="2.3 可交互时间（domready）"></a>2.3 可交互时间（domready）</h5><p>用户可以进行正常的点击、输入等操作，默认可以统计DOMContentLoaded事件发生的时间。</p>
-<h5 id="2-4-整页时间"><a href="#2-4-整页时间" class="headerlink" title="2.4 整页时间"></a>2.4 整页时间</h5><p>整页时间（Page Load Time），页面所有资源都加载完成并呈现出来所花的时间，这个就是load事件发生的时间。</p>
-<h2 id="二、如何提高性能"><a href="#二、如何提高性能" class="headerlink" title="二、如何提高性能"></a>二、如何提高性能</h2><h4 id="1、资源压缩合并，减少HTTP请求"><a href="#1、资源压缩合并，减少HTTP请求" class="headerlink" title="1、资源压缩合并，减少HTTP请求"></a>1、资源压缩合并，减少HTTP请求</h4><p>html 压缩、css 压缩、js 的压缩和混乱和文件合并。 资源压缩可以从文件中去掉多余的字符，比如回车、空格。</p>
-<h4 id="2、非核心代码异步加载"><a href="#2、非核心代码异步加载" class="headerlink" title="2、非核心代码异步加载"></a>2、非核心代码异步加载</h4><p>异步加载的三种方式—— 动态脚本创建、async 和 defer</p>
-<h4 id="3、使用浏览器缓存"><a href="#3、使用浏览器缓存" class="headerlink" title="3、使用浏览器缓存"></a>3、使用浏览器缓存</h4><h5 id="3-1-强缓存"><a href="#3-1-强缓存" class="headerlink" title="3.1 强缓存"></a>3.1 强缓存</h5><p>不向服务器发请求，直接从本地硬盘或内存中获取。利用HTTP响应报文中的Expires和Cache-Control两个字段来控制，表示资源的缓存时间。<br>Expires:该字段是HTTP/1.0的规范，是一个绝对时间的GMT格式，这个时间代表资源的失效时间，在该时间内即：命中强缓存。缺点：当客户端与服务器时间出现较大偏差，就会出现混乱。<br>Cache-Control:为了解决Expires出现的问题，HTTP/1.1添加了Cache-Control。主要是利用max-age来进行判断，是一个相对时间。如：Cache-Control:max-age=600,代表着资源的有效期是600秒。</p>
-<h5 id="3-1-协商缓存"><a href="#3-1-协商缓存" class="headerlink" title="3.1 协商缓存"></a>3.1 协商缓存</h5><p>向服务器发出验证，如果资源无更改，不重新返回资源内容，资源内容从本地获取。需要有服务器来确定客户端缓存资源是否可用。主要涉及Header中两个字段：Last-Modified/If-Modified-Since或ETag/If-None-Match,这两种字段都是成对出现的。若第一次响应头没有Last-Modified或ETag，则后续的请求头部也不会有If-Modified-Since或If-None-Match。</p>
-<h4 id="4、使用CDN"><a href="#4、使用CDN" class="headerlink" title="4、使用CDN"></a>4、使用CDN</h4><h4 id="5、预解析DNS"><a href="#5、预解析DNS" class="headerlink" title="5、预解析DNS"></a>5、预解析DNS</h4><h4 id="6、按需加载"><a href="#6、按需加载" class="headerlink" title="6、按需加载"></a>6、按需加载</h4>
+                <h2 id="一、前端现状，为什么要”前端工程化”？"><a href="#一、前端现状，为什么要”前端工程化”？" class="headerlink" title="一、前端现状，为什么要”前端工程化”？"></a>一、前端现状，为什么要”前端工程化”？</h2><p>&emsp; &emsp; 前端业务日益复杂化和多元化，我们需要考虑访问量和性能指标，我们需要多人合作、需要提高可维护性、需要提高开发质量、需要降低项目生产风险。<br>&emsp; &emsp; 这个时候原始的开发模式（编辑器写代码，无需编译，本地预览，确认OK，丢到服务器，等待用户访问）已经无法满足前端开发需求了。我们需要引入前端工程的思想和手段使前端开发的流程、技术、工具更规范化、标准化，从而提高效率和降低成本，减少不必要的重复工作时间 。 </p>
+<p>那么什么是”前端工程”？几个基本概念：</p>
+<p>1）<strong>工程</strong> ：官方定义是, 将自然科学的理论应用到具体工农业生产部门中形成的各学科的总称。<br>2）<strong>软件工程</strong>：官方定义是，研究和应用如何以系统性的、规范化的、可定量的过程化方法去开发和维护软件，以及如何把经过时间考验而证明正确的管理技术和当前能够得到的最好的技术方法结合起来。<br>3）<strong>前端工程</strong>：软件工程的一类。从软件工程的角度出发，使用软件工程的技术和方法来进行前端的开发。 </p>
+<h2 id="二、如何实现”前端工程化“？"><a href="#二、如何实现”前端工程化“？" class="headerlink" title="二、如何实现”前端工程化“？"></a>二、如何实现”前端工程化“？</h2><h4 id="1、首先我们应该从以下几个方面来思考"><a href="#1、首先我们应该从以下几个方面来思考" class="headerlink" title="1、首先我们应该从以下几个方面来思考"></a>1、首先我们应该从以下几个方面来思考</h4><h5 id="1-1、模块化"><a href="#1-1、模块化" class="headerlink" title="1.1、模块化"></a>1.1、模块化</h5><p>&emsp; &emsp; 模块化就是将一个大文件拆分成相互依赖的小文件，再进行统一的拼装和加载。</p>
+<p><strong><font size=3>模块化优势</font></strong></p>
+<p><strong><font size=4>·&ensp; </font></strong>避免命名冲突，减少命名空间污染<br><strong><font size=4>·&ensp; </font></strong>更好的分离，按需加载<br><strong><font size=4>·&ensp; </font></strong>更高复用性<br><strong><font size=4>·&ensp; </font></strong>更高维护性</p>
+<h5 id="1-2、组件化"><a href="#1-2、组件化" class="headerlink" title="1.2、组件化"></a>1.2、组件化</h5><p>&emsp; &emsp; 组件就是将一段UI样式和其对应的功能作为独立的整体去看待，页面上的每个独立的、可视/可交互区域视为一个组件，无论这个整体放在哪里去使用，它都具有一样的功能和样式，从而实现复用，这种整体化的细想就是组件化。</p>
+<p><strong><font size=3>组件化优势</font></strong></p>
+<p><strong><font size=4>·&ensp; </font></strong>每个组件对应一个工程目录,组件所需的各种资源都在这个目录下就近维护<br><strong><font size=4>·&ensp; </font></strong>由于组件具有独立性,因此组件与组件之间可以 自由组合<br><strong><font size=4>·&ensp; </font></strong>当不需要某个组件,或者想要替换组件时,可以整个目录删除/替换</p>
+<h5 id="1-3、规范化"><a href="#1-3、规范化" class="headerlink" title="1.3、规范化"></a>1.3、规范化</h5><p>&emsp; &emsp; 规范就是开发过程中的一种约定。开发规范的目的是统一团队成员的编码规范，便于团队协作和代码维护。开发规范没有统一的标准，每个团队可以建立自己的一套规范体系。</p>
+<h5 id="1-4、自动化"><a href="#1-4、自动化" class="headerlink" title="1.4、自动化"></a>1.4、自动化</h5><p>&emsp; &emsp; 前端工程化的很多脏活累活都应该交给自动化工具来完成，从而减少重复的工作。比如：<br>&emsp; &emsp; <strong><font size=4>·&ensp; </font></strong>自动化构建<br>&emsp; &emsp; <strong><font size=4>·&ensp; </font></strong>自动化部署<br>&emsp; &emsp; <strong><font size=4>·&ensp; </font></strong>自动化测试</p>
+<h4 id="2、然后我们应该从以下几个方面来实施"><a href="#2、然后我们应该从以下几个方面来实施" class="headerlink" title="2、然后我们应该从以下几个方面来实施"></a>2、然后我们应该从以下几个方面来实施</h4><h5 id="2-1、选型技术"><a href="#2-1、选型技术" class="headerlink" title="2.1、选型技术"></a>2.1、选型技术</h5><p>&emsp; &emsp; 根据公司的业务发展、产品风格，团队规模和团队特点等特征选择合适的开发语言、架构，在确保线上的质量和稳定性的前提下，来提升团队整体的开发效率。</p>
+<h5 id="2-2、定制规范"><a href="#2-2、定制规范" class="headerlink" title="2.2、定制规范"></a>2.2、定制规范</h5><p><strong><font size=4>·&ensp; </font></strong>目录结构的制定<br><strong><font size=4>·&ensp; </font></strong>编码规范（js、css）<br><strong><font size=4>·&ensp; </font></strong>前后端接口规范<br><strong><font size=4>·&ensp; </font></strong>文档规范<br><strong><font size=4>·&ensp; </font></strong>组件管理<br><strong><font size=4>·&ensp; </font></strong>Git分支管理<br><strong><font size=4>·&ensp; </font></strong>Commit描述规范<br><strong><font size=4>·&ensp; </font></strong>定期CodeReview<br><strong><font size=4>·&ensp; </font></strong>视觉图标规范<br>&emsp; &emsp; 其中编码规范最好采取ESLint和StyleLint等强制措施，配置git hooks可以实现Lint不过不能提交代码等机制，因为人是靠不住的。</p>
+<h5 id="2-3、分治系统"><a href="#2-3、分治系统" class="headerlink" title="2.3、分治系统"></a>2.3、分治系统</h5><p>&emsp; &emsp; 分而治之是软件工程中的重要思想，是复杂系统开发和维护的基石。在解决了基本开发效率运行效率问题之后，前端团队开始思考维护效率，模块化是目前前端最流行的分治手段。<br>JS模块化方案很多，AMD/CommonJS/UMD/ES6 Module等。<br>CSS模块化开发基本都是在less、sass、stylus等预处理器的import/mixin特性支持下实现的。</p>
+<h5 id="2-4、优化性能"><a href="#2-4、优化性能" class="headerlink" title="2.4、优化性能"></a>2.4、优化性能</h5><h6 id="2-4-1、请求数量："><a href="#2-4-1、请求数量：" class="headerlink" title="2.4.1、请求数量："></a>2.4.1、请求数量：</h6><p><strong><font size=4>·&ensp; </font></strong>合并脚本和样式表<br><strong><font size=4>·&ensp; </font></strong>拆分初始化负载，划分主域</p>
+<h6 id="2-4-2、请求带宽："><a href="#2-4-2、请求带宽：" class="headerlink" title="2.4.2、请求带宽："></a>2.4.2、请求带宽：</h6><p><strong><font size=4>·&ensp; </font></strong>开启GZip，精简JavaScript<br><strong><font size=4>·&ensp; </font></strong>移除重复脚本<br><strong><font size=4>·&ensp; </font></strong>图像优化</p>
+<h6 id="2-4-3、缓存利用："><a href="#2-4-3、缓存利用：" class="headerlink" title="2.4.3、缓存利用："></a>2.4.3、缓存利用：</h6><p><strong><font size=4>·&ensp; </font></strong>静态资源CDN部署<br><strong><font size=4>·&ensp; </font></strong>配置超长时间的本地缓存，提高性能<br><strong><font size=4>·&ensp; </font></strong>采用内容摘要作为缓存更新依据：精确的缓存控制（只有文件内容变化，才会导致相应url的变更，从而实现文件级别的精确缓存控制）</p>
+<h6 id="2-4-3、页面结构："><a href="#2-4-3、页面结构：" class="headerlink" title="2.4.3、页面结构："></a>2.4.3、页面结构：</h6><p><strong><font size=4>·&ensp; </font></strong>将样式表放在顶部，将脚本放在底部，尽早刷新文档的输出<br><strong><font size=4>·&ensp; </font></strong>代码校验，避免CSS表达式，避免重定向<br><strong><font size=4>·&ensp; </font></strong>更新资源发布路径实现非覆盖式发布：平滑升级</p>
+
             </div>
             <hr/>
 
@@ -445,7 +453,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2019/07/22/6%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/">https://github.com/blossomsun/blog/blog/2019/07/22/6%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2020/09/22/9.1%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">https://github.com/blossomsun/blog/blog/2020/09/22/9.1%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -483,8 +491,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/blog/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
-                                    <span class="chip bg-color">性能优化</span>
+                                <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/">
+                                    <span class="chip bg-color">前端工程</span>
                                 </a>
                             
                         </div>
@@ -652,29 +660,30 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/blog/2019/07/22/8.1%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
+                <a href="/blog/2020/09/22/9.1%20%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/2.jpg" class="responsive-img" alt="深拷贝和浅拷贝">
+                        <img src="/blog/medias/featureimages/13.jpg" class="responsive-img" alt="浅谈前端工程化">
                         
-                        <span class="card-title">深拷贝和浅拷贝</span>
+                        <span class="card-title">浅谈前端工程化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            js 深拷贝和浅拷贝区别，以及实现深拷贝的方法
+                            谈谈前端工程化
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -683,11 +692,12 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/js/">
-                        <span class="chip bg-color">js</span>
+                    <a href="/blog/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/">
+                        <span class="chip bg-color">前端工程</span>
                     </a>
                     
                 </div>
@@ -701,24 +711,37 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2019/05/10/1.3%20ASP-NET%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/">
+                <a href="/blog/2020/08/30/1.1.1%20%E7%8A%B6%E6%80%81%E7%A0%81%E8%AF%A6%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/10.jpg" class="responsive-img" alt="ASP .NET学习相关">
+                        <img src="/blog/medias/featureimages/11.jpg" class="responsive-img" alt="状态码详解">
                         
-                        <span class="card-title">ASP .NET学习相关</span>
+                        <span class="card-title">状态码详解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ASP.NET 开发注意点
+                            一、HTTP状态码分类HTTP状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP状态码共分为5种类型：
+
+
+
+分类
+分类描述
+
+
+
+1**
+信息，服务器收到请求，需要请求者继续执行操作
+
+
+2
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
                             </span>
                         <span class="publish-author">
                             
@@ -731,8 +754,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/ASP-NET/">
-                        <span class="chip bg-color">ASP.NET</span>
+                    <a href="/blog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
                 </div>

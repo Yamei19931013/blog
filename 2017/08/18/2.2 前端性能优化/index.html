@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="如何优化页面性能, 爱举重的拓跋英勋">
+    <meta name="keywords" content="前端性能优化, 爱举重的拓跋英勋">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>如何优化页面性能 | 爱举重的拓跋英勋</title>
+    <title>前端性能优化 | 爱举重的拓跋英勋</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -256,12 +256,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">如何优化页面性能</h1>
+                    <h1 class="description center-align post-title">前端性能优化</h1>
                 </div>
             </div>
         </div>
@@ -394,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-07-22
+                    2017-08-18
                 </div>
                 
 
@@ -410,17 +410,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、什么是性能？"><a href="#一、什么是性能？" class="headerlink" title="一、什么是性能？"></a>一、什么是性能？</h2><h4 id="1、直观体现："><a href="#1、直观体现：" class="headerlink" title="1、直观体现："></a>1、直观体现：</h4><p>页面加载、操作的流畅度</p>
-<h4 id="2、评判指标："><a href="#2、评判指标：" class="headerlink" title="2、评判指标："></a>2、评判指标：</h4><p>业界常用的指标是白屏、首屏、可交互时间和整页时间四个指标。我们可以通过performance API获取到响应的指标值。</p>
-<h5 id="2-1-白屏"><a href="#2-1-白屏" class="headerlink" title="2.1 白屏"></a>2.1 白屏</h5><p>指页面接收首字节时长(TTFB: time to first byte)。从浏览器发起请求到开始显示第一个页面元素的时间。现代浏览器不会等待CSS树（所有CSS文件下载和解析完成）和DOM树（整个body标签解析完成）构建完成才开始绘制，而是马上开始显示中间结果。所以经常在低网速的环境中，观察到页面由上至下缓慢显示完，或者先显示文本内容后再重绘成带有格式的页面内容。</p>
-<h5 id="2-2-首屏"><a href="#2-2-首屏" class="headerlink" title="2.2 首屏"></a>2.2 首屏</h5><p>首屏时间（FirstScreen Time），是指用户看到第一屏，即整个网页顶部大小为当前窗口的区域，显示完整的时间。常用的方法有，页面标签标记法、图像相似度比较法和首屏高度内图片加载法。</p>
-<h5 id="2-3-可交互时间（domready）"><a href="#2-3-可交互时间（domready）" class="headerlink" title="2.3 可交互时间（domready）"></a>2.3 可交互时间（domready）</h5><p>用户可以进行正常的点击、输入等操作，默认可以统计DOMContentLoaded事件发生的时间。</p>
-<h5 id="2-4-整页时间"><a href="#2-4-整页时间" class="headerlink" title="2.4 整页时间"></a>2.4 整页时间</h5><p>整页时间（Page Load Time），页面所有资源都加载完成并呈现出来所花的时间，这个就是load事件发生的时间。</p>
-<h2 id="二、如何提高性能"><a href="#二、如何提高性能" class="headerlink" title="二、如何提高性能"></a>二、如何提高性能</h2><h4 id="1、资源压缩合并，减少HTTP请求"><a href="#1、资源压缩合并，减少HTTP请求" class="headerlink" title="1、资源压缩合并，减少HTTP请求"></a>1、资源压缩合并，减少HTTP请求</h4><p>html 压缩、css 压缩、js 的压缩和混乱和文件合并。 资源压缩可以从文件中去掉多余的字符，比如回车、空格。</p>
-<h4 id="2、非核心代码异步加载"><a href="#2、非核心代码异步加载" class="headerlink" title="2、非核心代码异步加载"></a>2、非核心代码异步加载</h4><p>异步加载的三种方式—— 动态脚本创建、async 和 defer</p>
-<h4 id="3、使用浏览器缓存"><a href="#3、使用浏览器缓存" class="headerlink" title="3、使用浏览器缓存"></a>3、使用浏览器缓存</h4><h5 id="3-1-强缓存"><a href="#3-1-强缓存" class="headerlink" title="3.1 强缓存"></a>3.1 强缓存</h5><p>不向服务器发请求，直接从本地硬盘或内存中获取。利用HTTP响应报文中的Expires和Cache-Control两个字段来控制，表示资源的缓存时间。<br>Expires:该字段是HTTP/1.0的规范，是一个绝对时间的GMT格式，这个时间代表资源的失效时间，在该时间内即：命中强缓存。缺点：当客户端与服务器时间出现较大偏差，就会出现混乱。<br>Cache-Control:为了解决Expires出现的问题，HTTP/1.1添加了Cache-Control。主要是利用max-age来进行判断，是一个相对时间。如：Cache-Control:max-age=600,代表着资源的有效期是600秒。</p>
-<h5 id="3-1-协商缓存"><a href="#3-1-协商缓存" class="headerlink" title="3.1 协商缓存"></a>3.1 协商缓存</h5><p>向服务器发出验证，如果资源无更改，不重新返回资源内容，资源内容从本地获取。需要有服务器来确定客户端缓存资源是否可用。主要涉及Header中两个字段：Last-Modified/If-Modified-Since或ETag/If-None-Match,这两种字段都是成对出现的。若第一次响应头没有Last-Modified或ETag，则后续的请求头部也不会有If-Modified-Since或If-None-Match。</p>
-<h4 id="4、使用CDN"><a href="#4、使用CDN" class="headerlink" title="4、使用CDN"></a>4、使用CDN</h4><h4 id="5、预解析DNS"><a href="#5、预解析DNS" class="headerlink" title="5、预解析DNS"></a>5、预解析DNS</h4><h4 id="6、按需加载"><a href="#6、按需加载" class="headerlink" title="6、按需加载"></a>6、按需加载</h4>
+                <hr>
+<p>性能优化<br>1、减少http请求次数<br>2、当要设置的样式很多试，设置className,而不是直接操作style<br>3、少用全局变量<br>4、避免使用css表达式  css Expression<br>5、图片预加载，将样式表放在底部<br>6、避免在页面主体中使用table,table要等其中的内容完全下载后才会显示出来</p>
+<hr>
+<p>页面从输入url到页面加载显示全过程<br>1、浏览器根据请求的url交给DNS进行域名解析，找到真实ip,然后像服务器发起请求<br>2、服务器交给后台处理完成后返回数据，浏览器接受文件（html、js、css、图像等）<br>3、浏览器对加载到的资源进行语法解析，建立内部数据结构<br>4、载入解析到资源文件，渲染页面，完成。</p>
+
             </div>
             <hr/>
 
@@ -445,7 +439,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2019/07/22/6%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/">https://github.com/blossomsun/blog/blog/2019/07/22/6%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2017/08/18/2.2%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">https://github.com/blossomsun/blog/blog/2017/08/18/2.2%20%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -656,24 +650,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/blog/2019/07/22/8.1%20%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
+                <a href="/blog/2017/08/18/2.1%20%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/2.jpg" class="responsive-img" alt="深拷贝和浅拷贝">
+                        <img src="/blog/medias/featureimages/7.jpg" class="responsive-img" alt="浏览器兼容问题与解决方案">
                         
-                        <span class="card-title">深拷贝和浅拷贝</span>
+                        <span class="card-title">浏览器兼容问题与解决方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            js 深拷贝和浅拷贝区别，以及实现深拷贝的方法
+                            有哪些浏览器兼容问题？我们该如何解决？
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2017-08-18
                         </span>
                         <span class="publish-author">
                             
@@ -686,8 +680,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/js/">
-                        <span class="chip bg-color">js</span>
+                    <a href="/blog/tags/%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/">
+                        <span class="chip bg-color">兼容问题</span>
                     </a>
                     
                 </div>
@@ -701,24 +695,29 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2019/05/10/1.3%20ASP-NET%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/">
+                <a href="/blog/2017/05/10/5.2%20vue%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E9%BB%98%E8%AE%A480%E7%AB%AF%E5%8F%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/10.jpg" class="responsive-img" alt="ASP .NET学习相关">
+                        <img src="/blog/medias/featureimages/20.jpg" class="responsive-img" alt="vue项目配置默认80端口">
                         
-                        <span class="card-title">ASP .NET学习相关</span>
+                        <span class="card-title">vue项目配置默认80端口</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ASP.NET 开发注意点
+                            话不多说，直接上代码：
+devServer: {
+    host: &#39;0.0.0.0&#39;, //target host
+    port: 80,
+    https: false,
+    hot: false,// ho
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-05-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-05-10
                             </span>
                         <span class="publish-author">
                             
@@ -731,8 +730,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/ASP-NET/">
-                        <span class="chip bg-color">ASP.NET</span>
+                    <a href="/blog/tags/vue/">
+                        <span class="chip bg-color">vue</span>
                     </a>
                     
                 </div>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="微前端相关（一）, 爱举重的拓跋英勋">
+    <meta name="keywords" content="Vue原理, 爱举重的拓跋英勋">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>微前端相关（一） | 爱举重的拓跋英勋</title>
+    <title>Vue原理 | 爱举重的拓跋英勋</title>
     <link rel="icon" type="image/png" href="/blog/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/blog/libs/awesome/css/all.css">
@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/common.css">
 
     <script src="/blog/libs/jquery/jquery.min.js"></script>
 
@@ -255,12 +256,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/blog/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">微前端相关（一）</h1>
+                    <h1 class="description center-align post-title">Vue原理</h1>
                 </div>
             </div>
         </div>
@@ -377,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                                <span class="chip bg-color">微前端</span>
+                            <a href="/blog/tags/vue/">
+                                <span class="chip bg-color">vue</span>
                             </a>
                         
                     </div>
@@ -393,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-04-16
+                    2017-08-21
                 </div>
                 
 
@@ -409,80 +410,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>微服务之间中转白屏问题；<br>主框架里放通用的组件集合(比如：导航)，在子项目里无需再引入，子项目只关心自己的业务就可以；<br>乾坤（最低 IE 版本为 11）：<br>        简单<br>        任意 js 框架均可使用。子应用接入像使用接入一个 iframe 系统一样简单，但实际不是 iframe。</p>
-<pre><code>    完备
-    几乎包含所有构建微前端系统时所需要的基本能力，如 样式隔离、js 沙箱、预加载等。
-
-    生产可用
-    已在蚂蚁内外经受过足够大量的线上系统的考验及打磨，健壮性值得信赖(200多个线上应用用接入)
-
-    官网：https://qiankun.umijs.org/zh/</code></pre><p>飞冰（主项目必须以React，最低 IE 版本为 11）：<br>        框架应用只需依赖 npm 包 @ice/stark，不耦合任何工程体系</p>
-<pre><code>    接入简单，子应用支持 React/Vue/Angular... 等不同框架
-
-    子应用独立开发、不耦合任何工程体系，已有应用迁移成本极低
-
-    整个系统用户体验好，跟 SPA 应用基本一致
-
-    子应用只需发布前端资源 bundle 即可，框架应用通过 bundle 渲染子应用
-    不足
-    样式只能通过约定以及CSS Modules来与框架隔离
-    资源无法预加载
-    生产可用
-    已在阿里创作者平台、阿里健康-熙牛医疗云医院信息系统、淘系小二工作台
-    官网：https://ice.work/docs/icestark/about</code></pre><p>H5导航接入：</p>
-<p>头部导航和底部的导航主站会统一引用，接入乾坤后需要子应用通知主应用页面路由的变化。<br>各微服务原页面内引用的导航不需要删除，导航组件会根据环境自动选择加不加载<br>接入方法：<br>1、原mount 方法内处理乾坤路由的方法多接受2个参数setGlobalState, state，用于父子通信</p>
-<pre><code class="javascript">export async function mount ({ data = {}, ROUTES, routerBase, state, setGlobalState } = {}) {
-if (!routerBase) return
-
-
-setLanguage().then(() =&gt; {
-instance = new Vue({
-router: getQkRouter(routerBase, setGlobalState, state),
-store,
-i18n,
-render: h =&gt;
-h(App, {
-props: { ...data, ...state }
-        })
-    }).$mount(&#39;#app_decorate&#39;)
-  })
-}</code></pre>
-<p>2、获取乾坤配置的路由内在路由跳转时发送消息通知父应用</p>
-<pre><code class="javascript">router.afterEach
-/**
- * 获取乾坤路由配置
- * @param {string} base 路由前缀
- */
-export const getQkRouter = (base, setGlobalState, state) =&gt; {
-  const subSiteRoutes = routesAll.map(r =&gt; {
-    r.path = base + r.path
-    return r
-  })
-  router.addRoutes(subSiteRoutes)
-  router.afterEach((route) =&gt; {
-    state.msgType = 0
-    state.msg = &#39;路由跳转&#39;
-    state.route = route
-    setGlobalState(state)
-  })
-  return router
-}</code></pre>
-<p>3、页面的路由根据需求加入meta参数开启关闭导航（isShowHeader， isShowFooter）</p>
-<pre><code class="javascript">routes
-{
-   path: &#39;/index&#39;,
-   name: &#39;index&#39;,
-   component: () =&gt; import(&#39;@/views/index/index&#39;),
-   meta: {
-     permission: &#39;&#39;,
-     title: &#39;首页&#39;,
-     vcode: vcodes.app_course,
-     functionCode: &#39;decorate_index_m&#39;,
-     page_id: &#39;decorate_index_m&#39;,
-     isShowHeader: true,
-     isShowFooter: true
-   }
- }</code></pre>
+                <p>1、观察者   — vue<br>2、脏检查   — ng</p>
+<p>class MyVue {<br>  contructor (options) {</p>
+<p>  }<br>}</p>
 
             </div>
             <hr/>
@@ -508,7 +438,7 @@ export const getQkRouter = (base, setGlobalState, state) =&gt; {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://github.com/blossomsun/blog/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/">https://github.com/blossomsun/blog/blog/2020/04/16/4.1%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/</a>
+                    <a href="https://github.com/blossomsun/blog/blog/2017/08/21/5%20Vue%E5%8E%9F%E7%90%86/">https://github.com/blossomsun/blog/blog/2017/08/21/5%20Vue%E5%8E%9F%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -546,8 +476,8 @@ export const getQkRouter = (base, setGlobalState, state) =&gt; {
                     
                         <div class="article-tag">
                             
-                                <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                                    <span class="chip bg-color">微前端</span>
+                                <a href="/blog/tags/vue/">
+                                    <span class="chip bg-color">vue</span>
                                 </a>
                             
                         </div>
@@ -719,70 +649,25 @@ export const getQkRouter = (base, setGlobalState, state) =&gt; {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/blog/2020/04/16/4.2%20%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/">
+                <a href="/blog/2018/06/12/5.3%20vue%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/2.jpg" class="responsive-img" alt="微前端相关(二)">
+                        <img src="/blog/medias/featureimages/19.jpg" class="responsive-img" alt="vue 全家桶之基础框架">
                         
-                        <span class="card-title">微前端相关(二)</span>
+                        <span class="card-title">vue 全家桶之基础框架</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            微前端架构
+                            Vue 前端基础框架
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-06-12
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            blossomsun
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/blog/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-                        <span class="chip bg-color">微前端</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/blog/2019/08/22/5.3.4%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue%20CLI/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/blog/medias/featureimages/15.jpg" class="responsive-img" alt="全家桶之 Vue CLI">
-                        
-                        <span class="card-title">全家桶之 Vue CLI</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            脚手架工具，帮你快速上手 Vue 开发，无需再花多余时间去实现项目架构
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-08-22
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -796,6 +681,51 @@ export const getQkRouter = (base, setGlobalState, state) =&gt; {
                     
                     <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
                         <span class="chip bg-color">vue 全家桶</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/blog/2017/08/21/5.1.2%20v-if%20%20%E5%92%8C%20v-for%20%E8%83%BD%E4%B8%8D%E8%83%BD%E4%B8%80%E8%B5%B7%E5%86%99/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/blog/medias/featureimages/4.jpg" class="responsive-img" alt="v-if 和 v-for 能不能一起写？">
+                        
+                        <span class="card-title">v-if 和 v-for 能不能一起写？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            v-for和v-if不应该一起使用，必要情况下应该替换成computed属性。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-08-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            blossomsun
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/blog/tags/vue/">
+                        <span class="chip bg-color">vue</span>
                     </a>
                     
                 </div>
@@ -976,12 +906,12 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                    type="playlist"
                    id="503838841"
                    fixed='true'
-                   autoplay='false'
+                   autoplay='true'
                    theme='#42b983'
                    loop='all'
                    order='random'
                    preload='auto'
-                   volume='0.7'
+                   volume='0.5'
                    list-folded='true'
         >
         </meting-js>
@@ -998,7 +928,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2019</span>
             <a href="/blog/about" target="_blank">blossomsun</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="#" target="_blank">Matery</a>
             <br>
             
             

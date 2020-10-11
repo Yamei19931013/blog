@@ -26,6 +26,7 @@
     <link rel="stylesheet" type="text/css" href="/blog/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/blog/css/common.css">
 
     <script src="/blog/libs/jquery/jquery.min.js"></script>
 
@@ -417,11 +418,12 @@
 <h5 id="3-fetch"><a href="#3-fetch" class="headerlink" title="3.fetch"></a>3.fetch</h5><p>3.1<br>fetch是在ES6出现的，使用了ES6中的promise对象，是基于promise设计的。Fetch的代码结构比起ajax简单多了，参数有点像jQuery ajax。但是，fetch不是ajax的进一步封装，而是原生js，没有使用XMLHttpRequest对象。</p>
 <p>3.2 优点<br> 1） 语法简洁，更加语义化<br> 2） 基于标准 Promise 实现，支持 async/await<br> 3） 同构方便，使用 <a href="https://github.com/matthew-andrews/isomorphic-fetch">isomorphic-fetch</a><br> 4） 更加底层，提供的API丰富（request, response）<br> 5） 脱离了XHR，是ES规范里新的实现方式</p>
 <p>3.3 缺点<br> 1）fetch的兼容性并不太好,ie 和 safari 都不支持；<br> 2）fetch是一个低层次的API，你可以把它考虑成原生的XHR，所以使用起来并不是那么舒服，需要进行封装；</p>
-<h2 id="一、axios-如何使用"><a href="#一、axios-如何使用" class="headerlink" title="一、axios 如何使用?"></a>一、axios 如何使用?</h2><h5 id="1、拦截器设置"><a href="#1、拦截器设置" class="headerlink" title="1、拦截器设置"></a>1、拦截器设置</h5><pre><code class="javascript"> // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
+<h2 id="一、axios-如何使用"><a href="#一、axios-如何使用" class="headerlink" title="一、axios 如何使用?"></a>一、axios 如何使用?</h2><h5 id="1、拦截器设置"><a href="#1、拦截器设置" class="headerlink" title="1、拦截器设置"></a>1、拦截器设置</h5><p> axios 提供了两大拦截器。一种是请求方向的，一种是响应方向的。<br> 1.1 发起请求可以添加网页加载动画<br> 1.2 使用token认证时 检查是否有token<br> 1.3 响应时数据处理</p>
+<pre><code class="javascript"> // 添加请求拦截器
+axios.interceptors.request.use((config)=&gt; {
     // 在发送请求之前做些什么
     return config;
-  }, function (error) {
+  }, error=&gt; {
     // 对请求错误做些什么
     return Promise.reject(error);
   });
@@ -435,7 +437,19 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });</code></pre>
 <h5 id="2、上传文件处理"><a href="#2、上传文件处理" class="headerlink" title="2、上传文件处理"></a>2、上传文件处理</h5><p> creat一个纯净的axios请求，挂载到vue原型里</p>
-
+<h5 id="3、axios并发请求"><a href="#3、axios并发请求" class="headerlink" title="3、axios并发请求"></a>3、axios并发请求</h5><p>axios.all.()<br>axios.spread((res1,res2) =&gt;{</p>
+<p>})</p>
+<h5 id="4、axios全局配置"><a href="#4、axios全局配置" class="headerlink" title="4、axios全局配置"></a>4、axios全局配置</h5><p> 4.1、 axios.defaults.baseUEL = “”;<br> 4.2、 axios.defaults.timeout = 5000;</p>
+<h5 id="5、axios的实例"><a href="#5、axios的实例" class="headerlink" title="5、axios的实例"></a>5、axios的实例</h5><pre><code class="javascript"> let newAxios = axios.create({
+     baseURL:&#39;&#39;,
+     timeout: 500
+ }) // 创建实例
+ newAxios({
+   url:&#39;&#39;
+ }).then(res=&gt;{
+ }).catch(err=&gt;{   
+ })</code></pre>
+<h5 id="6、axios在vue中的模块封装"><a href="#6、axios在vue中的模块封装" class="headerlink" title="6、axios在vue中的模块封装"></a>6、axios在vue中的模块封装</h5>
             </div>
             <hr/>
 
@@ -671,24 +685,24 @@ axios.interceptors.response.use(function (response) {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/blog/2019/08/22/5.3.4%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue%20CLI/">
+                <a href="/blog/2020/05/05/1.2%20%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/15.jpg" class="responsive-img" alt="全家桶之 Vue CLI">
+                        <img src="/blog/medias/featureimages/6.jpg" class="responsive-img" alt="20200505总结">
                         
-                        <span class="card-title">全家桶之 Vue CLI</span>
+                        <span class="card-title">20200505总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            脚手架工具，帮你快速上手 Vue 开发，无需再花多余时间去实现项目架构
+                            总结
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-08-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-05
                         </span>
                         <span class="publish-author">
                             
@@ -701,8 +715,8 @@ axios.interceptors.response.use(function (response) {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/blog/tags/vue-%E5%85%A8%E5%AE%B6%E6%A1%B6/">
-                        <span class="chip bg-color">vue 全家桶</span>
+                    <a href="/blog/tags/my-review/">
+                        <span class="chip bg-color">my review</span>
                     </a>
                     
                 </div>
@@ -716,19 +730,19 @@ axios.interceptors.response.use(function (response) {
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/blog/2019/08/22/5.3.2%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue-Router/">
+                <a href="/blog/2019/08/22/5.3.4%20%E5%85%A8%E5%AE%B6%E6%A1%B6%E4%B9%8B%20Vue%20CLI/">
                     <div class="card-image">
                         
                         
-                        <img src="/blog/medias/featureimages/8.jpg" class="responsive-img" alt="全家桶之 Vue Router">
+                        <img src="/blog/medias/featureimages/15.jpg" class="responsive-img" alt="全家桶之 Vue CLI">
                         
-                        <span class="card-title">全家桶之 Vue Router</span>
+                        <span class="card-title">全家桶之 Vue CLI</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Vue 官方的路由插件，构建单页面应用必不可少
+                            脚手架工具，帮你快速上手 Vue 开发，无需再花多余时间去实现项目架构
                         
                     </div>
                     <div class="publish-info">
@@ -928,12 +942,12 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                    type="playlist"
                    id="503838841"
                    fixed='true'
-                   autoplay='false'
+                   autoplay='true'
                    theme='#42b983'
                    loop='all'
                    order='random'
                    preload='auto'
-                   volume='0.7'
+                   volume='0.5'
                    list-folded='true'
         >
         </meting-js>
@@ -950,7 +964,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <span id="year">2019</span>
             <a href="/blog/about" target="_blank">blossomsun</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            |&nbsp;Theme&nbsp;<a href="#" target="_blank">Matery</a>
             <br>
             
             
